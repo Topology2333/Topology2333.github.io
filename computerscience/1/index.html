@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>1- | Topology2333&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">1-</span></h1>
+<h2 class="author">Topology2333</h2>
+<h2 class="date">2022/11/30</h2>
+</div>
+
+<main>
+<h1 id="这一篇转载第九章指针与数组部分">这一篇转载第九章：<code>指针与数组</code>部分</h1>
+<pre><code>
+</code></pre>
+<h1 id="指针的概念与含义">~指针的概念与含义~</h1>
+<h2 id="指针是变量存放内存地址的变量">指针是变量，存放内存地址的变量</h2>
+<p>指针的作用：
+－较之其他方法通常可以生成更高效、紧凑的代码 ；
+－可得到多个函数的返回值;
+－操作动态数据结构；
+以前学过静态数据结构（数据空间大小是编译时期确定的, 运行期间不能改变）</p>
+<h3 id="一变量地址">一、变量地址</h3>
+<p>变量地址──系统分配给变量的内存单元的起始地址。</p>
+<p>变量被分配地址后，尽管其内容可被修改，但它的地址将永远不会改变。</p>
+<h3 id="二变量值的存取通过变量在内存中的地址对变量进行存取">二、变量值的存取──通过变量在内存中的地址对变量进行存取：</h3>
+<p>(1) 直接访问──直接利用变量的地址进行存取</p>
+<pre><code>1)scanf (“％ d&quot;, &amp;i) 的执行过程：
+先找到变量i的起始地址2002；
+然后将键盘输入的值送到内存单元2002和2003中(假设int类型占用2字节内存)。
+
+2)printf (“i=％d&quot;, i) 的执行过程: 
+首先找到变量i的起始地址2002，
+然后从内存单元2002和2003中取出其值，将其输出。
+</code></pre>
+<p>(2) 间接访问─通过指针变量来访问该变量</p>
+<pre><code>可以定义一种特殊的变量（称为指针变量），
+用来存放其它变量的内存起始地址。
+通过指针变量来访问其他变量。
+</code></pre>
+<h2 id="三指针变量的概念">三、指针(变量)的概念</h2>
+<p>指针变量：专门存放另一变量内存起始地址的变量，简称为指针。</p>
+<p>间接访问：先从指针变量countPtr中取出变量count的地址，然后根据这个地址访问count。</p>
+<pre><code>
+</code></pre>
+<h1 id="指针变量的声明和初始化">~指针变量的声明和初始化~</h1>
+<h2 id="一指针变量的定义">一、指针变量的定义</h2>
+<p>int count ,*countPtr;
+count = 10;
+countPtr =&amp; count;</p>
+<p><code>[存储类型]</code>    数据类型  * 指针变量名；
+指针变量本身的存储类型（auto、register、static、extern）
+在指针变量名中包含字母Ptr可以清晰地表明这些是指针变量。</p>
+<p>指针变量是一种特殊的变量，也具有变量的三个要素：
+（1）变量名：这与一般变量取名相同。
+（2）指针变量的类型：是指针所指向的变量的类型。
+（3）指针的值：是某个变量的内存地址。</p>
+<p>声明指针变量时需注意：
+int * ptr1, * ptr2;<br>
+指针变量名分别是ptr1 和ptr2，而不是<em>ptr1和</em>ptr2；</p>
+<pre><code>指针变量必须在其名字前用前缀*声明
+声明 int c, * countPtr, count 中，
+只有countPtr是指针变量；
+
+指针变量可被声明为指向任何数据类型(整型、浮点型、字符型、指针、结构等)；
+</code></pre>
+<h2 id="二指针变量的初始化">二、指针变量的初始化</h2>
+<p>没有初始化的指针变量可能指向任意地址。
+指针在使用前必须初始化，否则将会导致意想不到的问题！</p>
+<p>指针变量可以赋值为0（<strong>唯一可直接赋给指针变量的整数值</strong>）、NULL（在stdlib.h中定义的常量0）或某个内存地址。
+当赋值为0或者NULL时，表示该指针为空指针，不指向任何地址。推荐当指针不指向任何地址时，赋值为NULL。</p>
+<h1 id="三指针运算符">三、~指针运算符~</h1>
+<p>三类运算：</p>
+<pre><code> &amp;  取变量的地址
+ *  取指针所指变量的值 （间接访问）
+ =  指针的赋值运算
+指针还可以进行关系运算和算数运算，后面介绍
+&amp;地址运算符，取变量的地址。单目运算符
+*间接引用运算符，取指针所指变量的值。单目运算符。
+</code></pre>
+<p><strong>注意</strong>：当一个指针p是空指针时(即p==NULL或p==0)，禁止访问该指针指向的内存值！
+以下代码运行不正确：
+int *p;
+p=NULL;  /<em>或p＝0</em>/
+printf(“%d”, *p);</p>
+<pre><code class="language-c">#include&lt;stdio.h&gt;
+main()
+{    int a, * aPtr; /*aPtr是一个指向整数的指针*/
+      a=7; aPtr=&amp;a;
+    printf(&quot;The address of a is %p\n&quot;
+
+    /*％p:以十六进制整数形式输出内存地址*/
+
+    	&quot;The value of aPtr is %p\n\n&quot;, &amp;a, aPtr );
+    printf(&quot;The value of a is %d\n&quot;
+    	&quot;The value of *aPtr is %d\n\n&quot;, a, *aPtr );
+    printf(&quot;Providing that * and &amp; are complements of each other\n&quot;
+    	&quot;&amp; * aPtr=%p\n * &amp; aPtr = %p\n\n&quot;, &amp;*aPtr,*&amp;aPtr );
+   printf(&quot;Providing that * &amp; a is the same as a\n&quot;
+    		“* &amp; a=%d\n a = %d\n\n”, *&amp;a,a   );
+} 
+
+</code></pre>
+<p><em>与&amp;为<strong>互逆运算</strong>
+&amp;</em> aPtr = &amp;(*aPtr) = &amp;a = aPtr
+*&amp;aPtr = *(&amp;aPtr) = *pPtr = aPtr</p>
+<pre><code>aPtr = &amp;a = &amp;(*aPtr) = * (&amp;aPtr) 
+a  = *aPtr = *(&amp;a) 但不能写成 &amp;(*a) ！
+</code></pre>
+<pre><code class="language-c">main()
+{
+    int i, j;
+    int *iPtr, *jPtr;
+
+    i=2; j=4;
+    iPtr=&amp;i;
+    jPtr=&amp;j;
+
+    printf(&quot;%d, %d\n&quot;, *iPtr, *jPtr);
+    printf(&quot;%p, %p\n&quot;, iPtr, jPtr);
+
+
+    i=*jPtr+1;   /*间接访问－读取*/
+    *jPtr=*jPtr+2; /*间接访问－写入*/
+
+    printf(&quot;%d, %d\n&quot;, i, j);
+    printf(&quot;%d, %d\n&quot;, *iPtr, *jPtr); 
+}
+
+</code></pre>
+
+</main>
+
+  <footer>
+  <script defer src="//yihui.org/js/math-code.js"></script>
+<script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script defer src="//yihui.org/js/center-img.js"></script>
+
+  
+  <hr/>
+  © <a href="https://github.com/Topology2333">Topology2333</a> 2022 &ndash; 2022 | <a href="https://github.com/Topology2333">Github</a> | <a href="https://twitter.com/VFriedrich8">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+
