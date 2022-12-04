@@ -6,7 +6,20 @@
     <description>Recent content in Computersciences on Topology2333&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://Topology2333.github.io/computerscience/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://Topology2333.github.io/computerscience/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2-</title>
+      <link>https://Topology2333.github.io/computerscience/2/</link>
+      <pubDate>Sun, 04 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://Topology2333.github.io/computerscience/2/</guid>
+      <description>这一篇转载第九章：数组部分 提纲7.1 总结与回顾（数据类型与程序设计）7.2 数组--数据的存储结构7.3 数组的声明、操作和使用7.4 字符数组（字符串及操作）7.5 数组作为函数参数的处理7.6 数组的排序、查找算法7.1 总结与回顾 简单数据类型的局限： 数据抽象的局限 很多客观世界的事物很难抽象到简单的数据类型上。 比如：数列或级数的抽象。 存储能力的局限 处理能力的局限 比如对任意数列的排序和查找问题，依照目前的能力尚不能够进行处理。 增强数据的表达、存储和处理能力
+7.2 数组&amp;ndash;数据存储结构 数组对表达对象的支持 线性表（向量）是具有相同数据类型的n(n&amp;gt;=0)个数据元素的有限序列，通常记为： （a1，a2，… ai-1，ai，ai+1，… an） 其中n为表长，n＝0时称为空表。 数组是对线性表的一种存储结构。 数组是一组连续的存储单元（存储结构） 连续的含义：这些存储单元位置相邻； 具有相同数据类型，相同的名字。 数组元素的访问（操作） 数组名[元素序号]。其中元素序号又称下标。 第一个元素的序号为0，因此c[0]引用数组c的第一个元素。c[i-1]引用第i个元素。 下标运算符“[ ]”（数组操作） 在赋值语句右边时，该操作从数组元素中检索数据； 例：x=c[1]；//读取下标为1的数组元素的值，赋给变量x； 在左边时，对数组元素赋值。 例：c[2]=x*3+5; //将赋值表达式右 边的值赋给下标为2的数组元素。
+7.3.1 数组的声明 数组的声明： （C99标准之前） 语法格式：元素类型名 数组名[常量]； 元素类型名 可以是整型、字符型、浮点型、结构和指针。 常量说明数组元素的个数，运算结果必须为整型。
+数组的声明：（C99标准） 允许声明变长数组 元素类型名 数组名[整型表达式]； int n; scanf(&amp;quot;%d&amp;quot;, &amp;amp;n); int score[n]; //数组长度为变量
+7.3.2数组的操作 数组的初始化 可利用声明语句对数组元素进行初始化： 元素类型名 数组名[整型表达式]={值，值……值}； 例如： int score[4]={65, 78, 54, 91};</description>
+    </item>
+    
     <item>
       <title>0-前言</title>
       <link>https://Topology2333.github.io/computerscience/%E5%89%8D%E8%A8%80/</link>
