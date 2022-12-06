@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>12-计导导论 | Topology2333&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">12-计导导论</span></h1>
+<h2 class="author">Topology2333</h2>
+<h2 class="date">2022/12/06</h2>
+</div>
+
+<main>
+<h1 id="这一篇转载-10">这一篇转载 10</h1>
+<pre><code>
+</code></pre>
+<h3 id="提纲">提纲</h3>
+<h3 id="101--引言">10.1  引言</h3>
+<h3 id="102--结构类型">10.2  结构类型</h3>
+<h3 id="103--结构变量的定义初始化">10.3  结构变量的定义、初始化</h3>
+<h3 id="104--结构类型的运算访问结构变量成员">10.4  结构类型的运算—访问结构变量成员</h3>
+<h3 id="105--结构类型作为函数参数">10.5  结构类型作为函数参数</h3>
+<h3 id="106--结构数组">10.6  结构数组</h3>
+<h3 id="107--类型定义typedef">10.7  类型定义typedef</h3>
+<h3 id="108--枚举类型">10.8  枚举类型</h3>
+<pre><code>
+</code></pre>
+<h1 id="101-引言">10.1 引言</h1>
+<p>在日常生活中，我们经常会用到一些表格。例如，下图是一张图书目录：
+为了用计算机程序实现对上述表格及表格中的元素的管理，需要先将表格进行存储。表格中的元素如何存储？
+10.1 引言
+根据以前知识，可定义7个数组来存储100本图书信息：
+char bookName[100][30];   //存储书名
+char author[100][30]; //存储作者
+char publisher[100][30]; //存储出版商名
+char date[100][10]; //存储版权日期
+int pages[100]; //存储页数
+int copies[100]; //存储册数
+float price[100]; //存储价格</p>
+<p>存在的问题：
+1.任何一本图书的信息分散在内存各处，要了解一本图书的信息，必须到各个数组的相应元素中去查找，很不方便。而且因为内存不集中，所以查找效率不高。
+2.存储结构比较零散，不易管理。</p>
+<p>而图书目录可以抽象为线性表（线性表是具有相同数据类型的n(n&gt;=0)个数据元素的有限序列），每一本图书的信息是表中的一个元素。有没有可能用一个一维数组来存储图书目录，每个数组元素存储一本图书的所有信息？</p>
+<p>如果可以，一个数组元素存储了多个不同类型的数据，那数组元素的类型又该如何定义？</p>
+<p>程序设计语言（包括C语言）一般都设计了数据类型的扩展机制&ndash;用户自定义数据类型。
+用户可以根据具体问题的需要，设计符合自己要求的新的数据类型。
+结构就是用户自定义的数据类型，结构可以用来解决上述问题。</p>
+<h1 id="102-结构类型的定义">10.2 结构类型的定义</h1>
+<p>一、结构类型的定义
+结构是用其他类型的数据构造出来的数据类型
+（注意：结构是一种数据类型）。</p>
+<p>上述图书目录的例子可以定义如下形式的结构
+（为了简化，假设一本书只包括书名、作者名和价格）：</p>
+<pre><code class="language-c">#define  MAXTITL 41 //书名最大长度
+#define  MAXAUTL 31  //作者名最大长度
+struct book{
+    char title[MAXTITL];
+    char author[MAXAUTL];
+    float value;
+ }；  
+
+#include &lt;stdio.h&gt;
+#define MAXTITL  41              
+#define MAXAUTL  31      
+struct book {           
+    char title[MAXTITL];
+    char author[MAXAUTL];
+    float value;
+};  
+int main(void)
+{
+    struct book library; // 把library 声明为 book类型的变量 
+
+    printf(&quot;Please enter the book title.\n&quot;);
+    gets(library.title); // access to the title portion      
+    printf(&quot;Now enter the author.\n&quot;);
+    gets(library.author);
+    printf(&quot;Now enter the value.\n&quot;);
+    scanf(&quot;%f&quot;, &amp;library.value);
+    printf(&quot;%s by %s: $%.2f\n&quot;,  library.title,
+          library.author, library.value);
+    printf(&quot;%s: \&quot;%s\&quot; ($%.2f)\n&quot;, library.author,
+          library.title, library.value);
+    printf(&quot;Done.\n&quot;);         
+    return 0;
+}
+</code></pre>
+<ol>
+<li>
+<p>“结构名”和“数据项”的命名规则，与变量名相同。</p>
+</li>
+<li>
+<p>数据类型相同的数据项，既可逐个、逐行分别定义，也可合并成一行定义。
+struct book{
+char title[MAXTITL]，author[MAXAUTL ];
+float value;
+}</p>
+</li>
+<li>
+<p>结构中的数据项可以是不同类型。整形、字符型、浮点型、指针，也允许是数组或者另一个已经定义的结构。</p>
+</li>
+<li>
+<p>１个数据项称为结构的１个成员。同一结构中的成员不能同名，不同结构中的成员可以同名。</p>
+</li>
+<li>
+<p>结构既可以在函数外定义，也可以在函数内定义。但函数内定义的结构只能在本函数中使用。</p>
+</li>
+<li>
+<p>不能在struct book结构中定义struct book类型的变量。但可以定义指向struct book类型的指针（称为自引用结构）。</p>
+</li>
+<li>
+<p>用户自己定义的结构是一种数据类型，与系统定义的标准类型（int、char等）一样，可用来定义结构变量。</p>
+</li>
+</ol>
+<h1 id="103-结构变量定义">10.3 结构变量定义</h1>
+<p>（2）直接定义法──在定义结构类型的同时，	定义结构变量
+struct book{
+char title[MAXTITL];
+char author[MAXAUTL ];
+float value;
+} library;  //在定义之后跟变量名
+说明：</p>
+<ol>
+<li>
+<p>结构与结构变量是两个不同的概念，其区别如同int类型与int型变量的区别一样。</p>
+</li>
+<li>
+<p>结构中的成员名，可以与程序中的变量同名，它们代表不同的对象，互不干扰。</p>
+</li>
+<li>
+<p>对结构变量的操作有：</p>
+<ol>
+<li>获取结构变量的地址: &amp;library;</li>
+<li>访问结构变量的成员（后面介绍）;</li>
+<li>把结构变量赋给同一类型的结构变量:
+book1=book2;//将book2中各成员的值赋给book1中各成员</li>
+<li>用sizeof运算符确定结构变量的大小
+sizeof(library)、sizeof(struct book)</li>
+</ol>
+<pre><code class="language-c">struct  date{  	/*日期结构类型*/
+   int year;       /*年*/
+   int month;   /*月*/
+   int day;       /*日*/
+ };
+struct  student{   /*学生信息结构类型*/
+   char  no[7];         /*学号*/
+   char  name[9];    /*姓名*/
+   char  sex[3];        /*性别*/
+   struct date birthday;      /*生日*/
+} ; 
+
+main()
+{
+struct  student stu;
+
+printf(&quot;%d\n&quot;,sizeof(struct student));
+printf(&quot;%p\n&quot;,stu.no);
+printf(&quot;%p\n&quot;,stu.name);
+printf(&quot;%p\n&quot;,stu.sex);
+printf(&quot;%p\n&quot;,&amp;stu.birthday);
+system(“pause”);
+return 0;
+}
+</code></pre>
+</li>
+</ol>
+<h1 id="103-结构变量的初始化">10.3 结构变量的初始化</h1>
+<p>在定义结构变量的同时可以进行初始化
+struct book library={
+&ldquo;The pirate and the Devious Damsel&rdquo;,
+&ldquo;Renee Vivotte&rdquo;,
+1.95 }；</p>
+<p>如果初始化的个数少于结构中的成员数目，剩余成员被自动化初始为0（整型、浮点型）、‘\0’（字符或者字符串型）、NULL（指针）</p>
+<p>struct student stu={“000102”,“张三”,“男”, {1980, 9, 20}};  //注意生日的初始化
+或者
+struct student stu={“000102”,“张三”,“男”, 1980, 9, 20};</p>
+<h1 id="104-访问结构变量成员">10.4 访问结构变量成员</h1>
+<p>使用结构成员运算符“.”
+通过结构变量名访问结构成员：结构变量名.结构成员名
+main()
+{		  	
+struct student stu={“000102”,“张三”,“男”, 					    {1980,9,20}};//注意生日的初始化
+printf(&ldquo;No:%s\n&rdquo;, stu.no);
+printf(&ldquo;Name:%s\n&rdquo;, stu.name);
+printf(“Sex:%s\n”, stu.sex);
+printf(&ldquo;Birthday:%d-&rdquo;, stu.birthday.year);
+printf(&quot;%d-&quot;, stu.birthday.month);
+printf(&quot;%d\n&quot;, stu.birthday.day);
+system(&ldquo;pause&rdquo;);
+return 0;	
+}
+访问结构变量成员－赋值
+main()
+{		  	
+struct student stu;
+scanf(&quot;%s&quot;, stu.no);
+scanf(&quot;%s&quot;, stu.name);
+scanf(&quot;%s&quot;, stu.sex);
+scanf(&quot;%d&quot;, &amp;stu.birthday.year);
+scanf(&quot;%d&quot;, &amp;stu.birthday.month);
+scanf(&quot;%d&quot;, &amp;stu.birthday.day);
+system(“pause”);
+return 0;
+}</p>
+<p>(1) 如果某成员本身又是一个结构类型，则只能通过多级的分量运算，对最低一级的成员进行引用。
+此时的引用格式扩展为：
+结构变量.成员.子成员.….最低一级子成员
+例如，stu.birthday.year
+(2) 对最低一级成员，可像同类型的普通变量一样，进行相应的各种运算。
+(3) 既可引用结构变量成员的地址，也可引用结构变量的地址。例如，stu.name ，&amp;stu</p>
+<p>二. 使用指针运算符“-&gt;”
+通过指向结构变量的指针访问结构成员：
+指针名-&gt;结构成员名
+或   (*指针名).结构成员名</p>
+<p>访问结构变量成员－使用指针运算符</p>
+<pre><code class="language-c">main()
+{		  		
+	struct student stu={&quot;000102&quot;,&quot;张三&quot;,&quot;男&quot;,{1980,9,20}};
+    struct student * ptr = &amp;stu;
+	printf(&quot;No:%s\n&quot;, ptr-&gt;no);
+	printf(&quot;Name:%s\n&quot;, ptr-&gt;name);	
+	printf(&quot;Sex:%s\n&quot;, ptr-&gt;sex);
+	printf(&quot;Birthday:%d-&quot;, ptr-&gt;birthday.year);
+	printf(&quot;%d-&quot;, ptr-&gt;birthday.month);
+	printf(&quot;%d\n&quot;, ptr-&gt;birthday.day);
+	system(&quot;pause&quot;);
+	return 0;	 
+}
+</code></pre>
+<pre><code class="language-c">main()
+{		  		
+	struct student stu={&quot;000102&quot;,&quot;张三&quot;,&quot;男&quot;,{1980,9,20}}; struct student * ptr=&amp;stu;
+	printf(&quot;No:%s\n&quot;, (*ptr).no);
+	printf(&quot;Name:%s\n&quot;, (*ptr). name);	
+	printf(&quot;Sex:%s\n&quot;, (*ptr). sex);
+	printf(&quot;Birthday:%d-&quot;, (*ptr). birthday.year);
+	printf(&quot;%d-&quot;, (*ptr). birthday.month);
+	printf(&quot;%d\n&quot;, (*ptr). birthday.day);
+	system(&quot;pause&quot;);
+	return 0;	 
+}
+</code></pre>
+<pre><code class="language-c">main()
+{		  		
+	struct student stu,* ptr=&amp;stu;
+	scanf(&quot;%s&quot;, ptr-&gt;no);
+	scanf(&quot;%s&quot;, ptr-&gt;name);	
+	scanf(&quot;%s&quot;, ptr-&gt;sex);
+	scanf(&quot;%d&quot;, &amp;ptr-&gt;birthday.year);
+	scanf(&quot;%d&quot;, &amp;ptr-&gt;birthday.month);
+	scanf(&quot;%d&quot;, &amp;ptr-&gt;birthday.day);     
+     system(“pause”);
+     return 0;
+}
+</code></pre>
+<pre><code>总结：访问结构变量的成员（以访问结构变量成员year为例）
+</code></pre>
+<p>三种方式：</p>
+<h1 id="105-函数和结构">10.5 函数和结构</h1>
+<p>把结构传递给函数的三种方式：
+－传递单个成员
+－传递整个结构
+－传递指向结构的指针</p>
+<ol>
+<li>
+<p>传递单个成员(此时和传递普通变量一样)
+void func(char a[],int i )  /<em>函数定义</em>/
+/<em>main函数中的函数调用</em>/
+func(stu.name, stu.birthday.year);</p>
+</li>
+<li>
+<p>传递整个结构（形参是实参的副本，两者互不影响）
+void func(struct student  stu)/<em>函数定义</em>/
+func(theStu);/* main函数中的函数调用*/</p>
+</li>
+<li>
+<p>传递指向结构的指针
+（被调用函数可以操作调用函数中的结构变量）
+void func(struct student * stuPtr)  /<em>函数定义</em>/
+func(&amp;stu);/<em>函数调用</em>/
+传递结构、还是指向结构的指针？
+传递指针
+优点：执行速度快：只需要传递一个地址。
+缺点：缺少对数据的保护（可以使用const限定词解决这个问题）。
+传递结构：
+优点：安全性。函数处理的是原始数据的副本。
+缺点：浪费时间和空间</p>
+</li>
+</ol>
+<p>10.6 结构数组</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#define MAXTITL   40
+#define MAXAUTL   40
+#define MAXBKS   100             
+
+struct book {                   
+    char title[MAXTITL];
+    char author[MAXAUTL];
+    float value;
+};
+int main(void)
+{
+    struct book library[MAXBKS]; 
+    int count = 0, index; 
+    printf(&quot;Please enter the book title.\n&quot;);
+    while (count &lt; MAXBKS &amp;&amp; gets(library[count].title) != NULL
+                          &amp;&amp; library[count].title[0] != '\0')
+    {
+        printf(&quot;Now enter the author.\n&quot;);
+        gets(library[count].author);
+        printf(&quot;Now enter the value.\n&quot;);
+        scanf(&quot;%f&quot;, &amp;library[count++].value);
+        while (getchar() != '\n')
+            continue;         
+        if (count &lt; MAXBKS)
+           printf(&quot;Enter the next title.\n&quot;);
+    }
+ if (count &gt; 0)
+    {
+          printf(&quot;Here is the list of your books:\n&quot;);
+          for (index = 0; index &lt; count; index++)
+              printf(&quot;%s by %s: $%.2f\n&quot;, library[index].title,
+              library[index].author, library[index].value);
+    }
+  else
+          printf(&quot;No books? Too bad.\n&quot;);  
+    
+   return 0;
+}
+</code></pre>
+<h1 id="107-类型定义-typedef">10.7 类型定义 typedef</h1>
+<p>可以用typedef建立已定义好的数据类型的别名。
+定义新类型Book，它是类型struct book的别名
+typedef struct  book Book；</p>
+<p>定义一个结构数组：
+Book library[100];</p>
+<pre><code>用typedef只是给已有类型增加１个别名，并不能创造１个新的类型。就如同人一样，除学名外，可以再取一个小名（或雅号。
+</code></pre>
+<p>举例：洗牌和发牌游戏模拟
+利用结构类型，重新设计扑克牌的存储结构
+洗牌和发牌游戏模拟
+洗牌和发牌游戏模拟：</p>
+<pre><code class="language-c">int main(void)
+{
+   Card deck[52];    
+   char * face[]={&quot;Ace&quot;,&quot;Deuce&quot;,&quot;Three&quot;,&quot;Four&quot;,&quot;Five&quot;,
+                  &quot;Six&quot;,&quot;Seven&quot;,&quot;Eight&quot;,&quot;Nine&quot;,&quot;Ten&quot;,
+                  &quot;Jeck&quot;,&quot;Queen&quot;,&quot;King&quot;}; 
+   char * suit[]={&quot;Hearts&quot;,&quot;Diamonds&quot;,&quot;Clubs&quot;,&quot;Spades&quot;}; 
+   
+   srand(time(NULL));
+
+   fillDeck(deck, face, suit); //初始化一副牌
+   shuffle(deck); //洗牌
+   deal(deck);  //发牌
+
+   return 0;
+}
+</code></pre>
+<p>初始化一副牌（算法1）</p>
+<pre><code class="language-c">void fillDeck(Card * wDeck, char * wFace[], char * wSuit[])
+{ 
+     int i, suit, face; 
+     i=0; 
+    for(suit=0; suit&lt;=3; suit++)
+         for(face=0;face&lt;=12;face++){
+              wDeck[i].suit=wSuit[suit];
+              wDeck[i].face=wFace[face];
+              i++; 
+     }
+}
+</code></pre>
+<p>初始化一副牌（算法2）</p>
+<pre><code class="language-c">void fillDeck(Card * wDeck, char * wFace[], char * wSuit[])
+ // 初始化发牌
+{    int i; 
+     for(i=0; i&lt;52; i++){ 
+          wDeck[i].face=wFace[i%13];
+          wDeck[i].suit=wSuit[i/13]; 
+      }
+}
+</code></pre>
+<pre><code class="language-c">//洗牌
+void shuffle(Card * wDeck)  // 洗牌
+{
+   int i, j;
+   Card temp;
+   
+   for (i=0; i&lt;52; i++) {
+        j=rand()%52; 
+        temp=wDeck[i]; 
+        wDeck[i]=wDeck[j]; 
+        wDeck[j]=temp; 
+   }
+}
+//发牌
+void deal(Card * wDeck) //发牌
+{
+   int i;
+   for(i=0; i&lt;52; i++){ 
+      printf(&quot;%5s of %- 8s%c&quot;, wDeck[i].face,
+                 wDeck[i].suit,  (i+1)%2?'\t':'\n');
+   }
+}
+</code></pre>
+<h1 id="108-枚举类型">10.8 枚举类型</h1>
+<p>目前为止，我们可能写出的是这样的代码：</p>
+<pre><code class="language-c"># define JAN 1
+# define FEB 2
+……
+# define DEC 12
+for(month=JAN; month&lt;=DEC; month++)
+      printf(&quot;%2d, %11s\n&quot;, month, monthName[month]);
+</code></pre>
+<p>要定义12个常量！能否有其他方法？</p>
+<p>枚举是C语言提供的一种用户自定义数据类型。
+enum months{JAN,FEB,MAR,APR,MAY,JUN,
+JUL,AUG,SEP,OCT,NOV,DEC}
+类型名：enum months
+类型的取值范围：{JAN,FEB,MAR,APR,MAY,JUN,
+JUL,AUG,SEP,OCT,NOV,DEC}
+其中：JAN值为0，FEB值为1，MAR值为2，依次类推</p>
+<p>枚举常量是自动设置值的符号常量。除非指定了起始值，否则枚举常量的值从0开始，后续的值依次加1。
+enum months{JAN=1,FEB,MAR,APR,MAY,JUN,
+JUL,AUG,SEP,OCT,NOV,DEC}
+JAN值为1，FEB值为2，MAR值为3，依次类推</p>
+<pre><code class="language-c">enum months{JAN=1,FEB,MAR,APR,MAY,JUN,
+			    JUL,AUG,SEP,OCT,NOV,DEC}
+int main(void)
+{
+   enum months month; 
+   char * monthName[]={&quot;&quot;,&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,……};
+    /*12个月名称略*/
+   for(month=JAN; month&lt;=DEC; month++)
+        printf(&quot;%2d,%11s\n&quot;, month, monthName[month]);
+ 
+   return 0;
+} 
+</code></pre>
+
+</main>
+
+  <footer>
+  <script defer src="//yihui.org/js/math-code.js"></script>
+<script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script defer src="//yihui.org/js/center-img.js"></script>
+
+  
+  <hr/>
+  © <a href="https://github.com/Topology2333">Topology2333</a> 2022 &ndash; 2022 | <a href="https://github.com/Topology2333">Github</a> | <a href="https://twitter.com/VFriedrich8">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

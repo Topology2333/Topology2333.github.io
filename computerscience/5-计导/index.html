@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5-计导导论 | Topology2333&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">5-计导导论</span></h1>
+<h2 class="author">Topology2333</h2>
+<h2 class="date">2022/12/06</h2>
+</div>
+
+<main>
+<pre><code>
+</code></pre>
+<h2 id="提纲">提纲</h2>
+<h3 id="1--一些常用的转义序列">1  一些常用的转义序列</h3>
+<h3 id="2--再论c语言的数据类型">2  再论C语言的数据类型</h3>
+<h3 id="3--混合运算时各种数据类型之间的转换">3  混合运算时各种数据类型之间的转换</h3>
+<h3 id="4--格式化输出">4  格式化输出</h3>
+<h3 id="5--赋值运算符">5  赋值运算符</h3>
+<h3 id="6--自增和自减运算符">6  自增和自减运算符</h3>
+<h3 id="7--条件运算符和逗号运算符">7  条件运算符和逗号运算符</h3>
+<h3 id="8--算术运算符的优先级和结合性">8  算术运算符的优先级和结合性</h3>
+<h3 id="9--switch多路选择结构">9  switch多路选择结构</h3>
+<h3 id="10-break和continue语句">10 break和continue语句</h3>
+<p>一些常用的转义序列
+C语言中，使用字符常量时，有一些字符是不可打印的，比如回车、退格等等。
+还有一类特殊字符，在C语言中本身有特殊的意义，比如单引号、双引号等。
+对于不可打印字符和语言中有特殊意义的字符，在C语言中使用转义字符‘\’表示。</p>
+<h1 id="31-一些常用的转义序列">3.1 一些常用的转义序列</h1>
+<pre><code class="language-c">    #include &lt;stdio.h&gt;
+    int main(void)
+    {
+    float salary;
+    printf(&quot;\aEnter your desired monthly salary: &quot;);
+    printf(&quot; $_______\b\b\b\b\b\b\b&quot;);
+    scanf(&quot;%f&quot;,&amp;salary);
+    printf(&quot;\n\t$%.2f a month is $%.2f a year.&quot;,salary,salary*12.0);
+    printf(&quot;\rGee!\n&quot;);
+    return 0;
+    } 
+    /* /t的使用，打印‘’、\和％ */
+    #include &lt;stdio.h&gt;
+    int main(void)
+    {
+    printf(&quot;123456781234567812345678\n&quot;);    
+    printf(&quot;1\t12\t123\tHello!\n&quot;);   /*\t的使用*/
+    printf(&quot;1234\r\&quot;\\%%\n&quot;);  /*打印''、\和％*/
+    
+    return 0;
+    }
+</code></pre>
+<h1 id="2--再论c语言的数据类型-1">2  再论C语言的数据类型</h1>
+<p>C语言中有以下基本数据类型：<br>
+char：字符型，可以存放字符集中的一个字符<br>
+int：整型<br>
+float：单精度浮点型<br>
+double：双精度浮点型<br>
+_Bool:布尔型</p>
+<p>此外，还有用于限定这些基本类型的类型限定符：<br>
+short（限定int）、long（限定int 和double）<br>
+signed和unsigned（限定char和任何整数类型）</p>
+<p>一、short、long限定整数类型<br>
+示例： short int age; <br>
+long int counter;<br>
+long long int population;<br>
+short int、 long int、long long int可分别简写为short，long和 long long。如：short age;<br>
+short数据一般为16位，int数据一般为16位或32位，long数据一般为32位, long long 为64位。</p>
+<p>各个编译程序可以根据硬件情况自由选择int、short、long的长度，唯一限制是short和int数据至少要有16位，而long数据至少要有32位；short数据长度≦int数据长度≦ long数据长度≦ long long数据长度。<br>
+三、signed、unsigned限定char类型和任何整数类型<br>
+signed char  、 unsigned char<br>
+signed short 、 unsigned short<br>
+signed int 、     unsigned int<br>
+signed long 、  unsigned long<br>
+signed long long、  unsigned long long</p>
+<p>C语言支持2种不同的字符类型：<br>
+signed char、 unsigned char
+转换说明符：<br>
+signed char：％c<br>
+unsigned char： ％u<br>
+取值范围：<br>
+signed char：－128～127（1字节）<br>
+unsigned char：0～255 （1字节）</p>
+<p>数值型转义字符：<br>
+‘\ddd’的三位八进制转义字符<br>
+’\xdd’的两位十六进制转义字符<br>
+表示ASCII码为这一数值的字符。</p>
+<p>用八进制ASCII表示字符：<br>
+beep=‘\007’<br>
+用十六进制ASCII表示字符：(即十进制的56)<br>
+beep=&rsquo;\x38&rsquo;；</p>
+<p>C 语言支持8种不同的整型：</p>
+<pre><code>	short 、  	unsigned short  
+	int、     	unsigned int  
+	long、  	unsigned long  
+    long long、 unsigned long long  
+</code></pre>
+<p>2 C语言中的八种整型类型<br>
+取值范围和具体系统有关。<br>
+在short是16位、int和long是32位、long long是64位的机器上数值范围如下：<br>
+signed short：-32768～32767 （ 16位）<br>
+unsigned short： 0～65535 （ 16位）<br>
+signed int： -2147483648～ 2147483647 （ 32位）<br>
+unsigned int： 0～4294967295 （ 32位）<br>
+signed long： -2147483648～ 2147483647 （ 32位）<br>
+unsigned long：0～4294967295 （ 32位）<br>
+signed long long： （64位）<br>
+-9223372036854775808~9223372036854775807<br>
+unsigned long long ： （64位）<br>
+0~ 18446744073709551615</p>
+<p>转换说明符：<br>
+short：％hd， 	  unsigned short ： ％hu<br>
+int ： %d，      	  unsigned int ： ％u<br>
+long ：%ld   	  unsigned long ： ％lu<br>
+long long：%lld      unsigned long long：%llu</p>
+<p>printf输出时：<br>
+对short：%ho(八进制形式), %hx(十六进制形式)<br>
+对long：%lo(八进制形式)，%lx(十六进制形式)</p>
+<p>// 以八进制%o、十进制%d、十六进制%x三种形式表示整数</p>
+<pre><code class="language-c">    #include &lt;stdio.h&gt;
+    int main()
+    {
+        int x = 100;
+        
+        printf(&quot;dec = %d; octal = %o; hex = %x\n&quot;, x, x, x);
+        printf(&quot;dec = %d; octal = %#o; hex = %#x\n&quot;, x, x, x);
+        //%# 十六进制数前显示 0x ，八进制数前显示0
+        return 0;
+    }
+</code></pre>
+<p>C语言支持三种不同长度的浮点数据类型：float、double和long double。</p>
+<p>其中float一般占４字节（32位）、提供７位有效数字；double一般占8字节（64位）、提供15~16位有效数字； long double 占12字节（96位）。</p>
+<p>转换说明符：<br>
+float：％f<br>
+double ：％lf<br>
+long double： ％lf  <br>
+输出时：<br>
+float：％f或%e<br>
+double ：％lf或%le <br>
+long double： ％lf 或％le</p>
+<p>2 C语言中的三种浮点类型
+取值范围：
+float :              -3.4<em>1038 ~3.4</em>1038<br>
+double :          -1.7<em>10308 ~1.7</em>10308<br>
+long double:   -1.2<em>104932 ~1.2</em>104932</p>
+<p>float型常量：用f或F做后缀。如2.3f，9.11E9F<br>
+long double型常量：用l或L做后缀。如：54.3l，4.32e4L</p>
+<pre><code class="language-c">    #include &lt;stdio.h&gt;
+    int main()
+    {
+        float aboat = 32000.0;
+        double abet = 2.14e9;
+        long double dip = 5.32e-5;
+    
+        printf(&quot;%f can be written %e\n&quot;, aboat, aboat);
+        printf(&quot;%f can be written %e\n&quot;, abet, abet);
+        printf(&quot;%f can be written %e\n&quot;, dip, dip);
+    
+        return 0;
+    }
+</code></pre>
+<h1 id="31-隐式转换">3.1 隐式转换</h1>
+<p>C编译器只计算操作数的数据类型相同的表达式。<br>
+如果一个运算符两侧的操作数的数据类型不同，则系统按“先转换、后计算”的原则，首先将数据自动转换成同一类型，然后在同一类型数据间进行运算。<br>
+类型转换分成两种：隐式转换和显式转换。<br>
+隐式转换的基本原则是将低类型数据转换成高类型数据（数据类型提升）。</p>
+<p>类型转换基本原则<br>
+当出现在表达式中时，有符号的char和short类型都将自动转换为int；无符号的char和short类型都将自动转换为unsigned int。<br>
+在包含两种数据类型的任何运算，两个值都被转换为两种类型里较高的级别。<br>
+类型级别从高到低的顺序是：long double，double，float，unsigned long long，long long，unsigned long，long，unsigned int和int（short和char没有出现在上述清单里，是因为他们已经被提升到int或unsigned int）<br>
+赋值语句里，计算的最后结果将被转换成要被赋予值的那个变量的类型(若浮点型赋值给整型，则小数点后被截掉)。<br>
+当作为函数的参数被传递时，char和short会被自动转换为int，float会被转换为double(但可以通过函数原型来阻止自动提升的发生)。</p>
+<pre><code>
+			long double
+
+		float           double
+
+            unsigned long long
+      
+                          long long
+
+			unsigned long
+
+			         long
+			unsigned int          unsigned char、 unsigned short
+       		         int              char、short
+</code></pre>
+<p>赋值中的类型转换<br>
+在一个赋值语句中，如果赋值运算符左侧变量的类型和右侧表达式的类型不一致，则赋值时将进行自动类型转换，将右侧表达式的值转换成左侧变量的类型。<br>
+int n；<br>
+char ch;<br>
+float f;<br>
+double d;</p>
+<h1 id="32显式转换">3.2显式转换</h1>
+<p>total/counter的运算结果是整型数；<br>
+为了得到浮点值，使用类型转换运算符，形式为：<br>
+(类型说明符) 表达式 或者 (类型说明符)(表达式)，用于将表达式的运算结果类型转换为类型说明符指定的数据类型；<br>
+类型转换运算(float)建立了操作数total的浮点值拷贝；存储在total值的值仍然是一个整型值；思考：下面语句的效果<br>
+average = (float)(total/counter);<br>
+使用类型转换运算符将高类型数据强制转换为低类型数据时，会引起精度损失（例如浮点转换成整型）或改变数据的值（例如long转换成short）。</p>
+<ol>
+<li>类型转换字符d──以带符号的十进制整数形式输出。
+可以指定输出宽度（总位数）和对齐方式（左对齐还是右对齐）。
+%5d:  宽为5，右对齐，左补空格。
+%-5d: 宽为5，左对齐，右补空格。
+若实际位数超出指定位数，则按实际位数输出。</li>
+</ol>
+<pre><code class="language-c"># include &lt;stdio.h&gt;
+# define PAGES 931
+int main()
+{
+    printf(“*%d*\n&quot;, PAGES);            // still will print 931
+    printf(&quot;*%2d*\n&quot;, PAGES);            // still will print 931
+    printf(&quot;*%10d*\n&quot;, PAGES);
+    printf(&quot;*%-10d*\n&quot;, PAGES);
+  
+    return 0;
+}
+</code></pre>
+<ol start="2">
+<li>类型转换字符f──以小数形式、按系统默认的宽度，输出单精度和双精度实数。<br>
+%f: 默认方式下输出小数点后6位；如： 123.556000。<br>
+%12f ：总共占据12位（包括小数点），其中保留小数点后面6位，不足位补零。若实际长度超出指定场宽，按实际输出。<br>
+%12.2f ：总共占据12位（包括小数点），其中保留小数点后面2位，不足位补零，若超出则按实际输出。<br>
+%e：总共占据13位。如： 1.235560e+002，分尾数（1.235560）和指数（+002）两部分。其中尾数占据8位(包括小数点)，最高位不为0，小数点后面保留6位；指数占据4位，1位是符号位。<br>
+%12.2e:共占12位(包括小数点和e)，其中尾数保留小数点后2位。<br>
+类型转换字符f──以小数形式、按系统默认的宽度，输出单精度和双精度实数。</li>
+</ol>
+<pre><code class="language-c">    #include &lt;stdio.h&gt;
+    int main(void)
+    {
+        const double RENT=3852.99;	
+        printf(&quot;*%f*\n&quot;, RENT);          
+        printf(&quot;*%e*\n&quot;, RENT);           
+        printf(&quot;*%4.2f*\n&quot;, RENT);
+        printf(&quot;*%3.1f*\n&quot;, RENT);
+        printf(&quot;*%10.3f*\n&quot;, RENT);           
+        printf(&quot;*%10.3e*\n&quot;, RENT);
+        printf(&quot;*%+4.2f*\n&quot;, RENT);
+        printf(“*%010.2f*\n”, RENT);   // 0表示如果有空位用0填充
+        return 0; 
+    }
+</code></pre>
+<ol start="3">
+<li>类型转换字符c──输出一个字符</li>
+</ol>
+<pre><code class="language-c">   main()
+   {
+         char c='A';
+         int i=65;
+         printf(&quot;c=%c,%5c,%d\n&quot;,c,c,c);
+         printf(&quot;i=%d,%c&quot;,i,i);
+   }
+</code></pre>
+<p>程序运行结果如下：</p>
+<pre><code>    c=A,□□□□A,65
+    i=65,A					
+</code></pre>
+<h1 id="5-赋值运算符">5 赋值运算符</h1>
+<p>=
++=、-=、*=、/=和%=</p>
+<p>c+=3等价于c=c+3；<br>
+i/=(j-1)等价于i=i/(j-1);<br>
+6 自加和自减运算符<br>
+如：以下两条语句效果相同<br>
+i＋＋；<br>
+＋＋i；<br>
+设i当前值为5，则以下两条语句效果不同<br>
+if（i++&gt;5)…  //先判断i&gt;5，然后i值加1<br>
+if  (++i&gt;5)…   //先将i值加1，然后判断i&gt;5</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main()
+{
+    int a = 1, b = 1;
+    int aplus, plusb;
+
+    aplus = a++;    
+    plusb = ++b;    
+    printf(&quot;a   aplus   b   plusb \n&quot;);
+    printf(&quot;%1d %5d %5d %5d\n&quot;, a, aplus, b, plusb);      
+    return 0;
+}
+</code></pre>
+<pre><code class="language-c">main()
+{
+     int i;
+	i = 5;
+	if(i++ &gt; 5)
+	    printf(&quot;i=%d,i++&gt;5 is true\n&quot;,i);
+	printf(&quot;i=%d\n&quot;,i);
+	
+	i = 5;
+	if(++i &gt; 5)
+	    printf(&quot;i=%d,++i&gt;5 is true\n&quot;,i);
+	printf(&quot;i=%d\n&quot;,i);	
+	 	
+	system(&quot;pause&quot;);		
+} 
+</code></pre>
+<pre><code class="language-c">main()
+{
+     int i;
+	i = 5;
+	if(i++ &gt; 4)
+	    printf(&quot;i=%d,i++&gt;4 is true\n&quot;,i);
+	printf(&quot;i=%d\n&quot;,i);
+	
+	i = 5;
+	if(++i &gt; 5)
+	    printf(&quot;i=%d,++i&gt;5 is true\n&quot;,i);
+	printf(&quot;i=%d\n&quot;,i);	
+	 	
+	system(&quot;pause&quot;);		
+} 
+</code></pre>
+<p>测试：<br>
+y = 2;<br>
+n = 3;<br>
+nextnum = (++y + n++)*6;<br>
+num=y+n;<br>
+求nextnum 和num的值？</p>
+<p><strong>注意</strong></p>
+<ol>
+<li>ans=num/2+5*(1+num++);<br>
+编译器可能先增加num的值，然后在num/2中使用新值。</li>
+<li>n=3；
+y=n++ + n++;<br>
+编译器可能使用n的旧值两次，然后将n增加2次，此时y值为6；可能在第1个n++使用旧值1次，然后增加n的值一次，再在第2个n++中使用n，最后n的值再加1，此时y的值为7.</li>
+<li>while(num&lt;21)<br>
+printf(“%10d  %10d\n”, num, num*num++);<br>
+编译器可能先计算最后一个参数的值，从而在计算其他参数前先让num加1</li>
+</ol>
+<p>自加自减运算符使用原则：<br>
+如果一个变量出现在同一个函数的多个参数中时，不要将自增自减运算符用在它上面；<br>
+当一个变量多次出现在一个表达式中时，不要将自增自减运算符用在它上面；</p>
+<h1 id="7-条件运算符">7 条件运算符</h1>
+<p>7 逗号运算符</p>
+<p>逗号运算符 ，用于把几个表达式串在一起。<br>
+逗号表达式<br>
+含有逗号运算符的表达式
+执行过程 <br>
+逗号表达式中最右边那个表达式的值作为逗号表达式的值。</p>
+<h1 id="8-运算符优先级和结合性">8 运算符优先级和结合性</h1>
+<p>运算符优先级：<br>
+taxRate = income &gt; 4000 &amp;&amp; residency &lt; 5 ? 3.5 : 2.0</p>
+<p>高优先级的运算符先运算:<br>
+关系运算符 &gt; 逻辑运算符 &gt; 条件运算符 &gt; 赋值运算符</p>
+<p>先计算 income &gt; 4000 和residency &lt; 5 ，然后计算income &gt; 4000 &amp;&amp; residency &lt; 5的值，接着计算出条件表达式的值，最后进行赋值运算。</p>
+<pre><code class="language-c">printf(“-a++ = %d\n”,-a++) ;  
+</code></pre>
+<p>-和++优先级相同，怎么计算？<br>
+结合性：当一个操作数两侧运算符具有相同的优先级时，该操作数是先与左边的运算符结合，还是先与右边的运算符结合。如： -a++是相当于-(a++)还是(-a)++ ？<br>
+从右向左结合性：当一个操作数两侧的运算符具有相同的优先级，且这两个运算符的结合性都是从右向左，则操作数与右侧的运算符结合，先进行右侧的运算；如：-和++都是从右向左结合，因此-a++；等价于： -(a++) 。<br>
+从左向右结合性：当一个操作数两侧的运算符具有相同的优先级，且这两个运算符的结合性都是从左向右，则操作数与左侧的运算符结合， 先进行左侧的运算；如：算数运算符从左向右结合，因此a+b-c等价于(a+b)-c。<br>
+是否存在优先级相同的运算符但结合性不同？优先级相同的运算符结合性也相同。</p>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    main()
+    {
+    int a=1,b,c;
+    printf(“-a++ = %d\n”,-a++) ;  /*右结合,相当于-(a++)*/
+    printf(“a = %d\n”,a) ; 
+    a=b=c=3;   /*右结合,相当于c=3;b=c;a=b, */
+    printf(“a = %d ,b = %d,c = %d\n”,a,b,c) ;  
+    a+=b+=3;  /* 右结合，相当于b+=3;a+=b; */
+    printf(&quot;a = %d ,b = %d\n&quot;,a,b) ;
+    }
+</code></pre>
+<h1 id="9-switch多路选择结构">9 switch多路选择结构</h1>
+<p>if语句有单分支和双分支结构<br>
+考虑下面要求：变量day取值为0～6，0代表周日、1～6代表周一到周六。输出要求：当day＝＝0时输出“Sunday”,day==1时输出“Monday”……<br>
+这种多分支的选择结构可以使用switch语句来实现。<br>
+switch多路选择结构</p>
+<ol>
+<li>switch语句的一般形式<br>
+switch (表达式) {<br>
+case   常量表达式1：语句组；break；<br>
+case   常量表达式2：语句组；break;<br>
+&hellip;&hellip;<br>
+case   常量表达式ｎ：语句组；break；<br>
+[default：语句组；[break; ]] <br>
+}</li>
+</ol>
+<pre><code class="language-c">    main()
+    { 
+    int day;
+    scanf(&quot;%d&quot;,&amp;day);
+    switch (day){
+        case 0: printf(&quot;Sunday\n&quot;);break; 
+        case 1: printf(&quot;Monday\n&quot;); break; 
+        case 2: printf(&quot;Tuesday\n&quot;); break; 
+        case 3: printf(&quot;Wednesday\n&quot;); break; 
+        case 4: printf(&quot;Thursday\n&quot;);break;  
+        case 5: printf(&quot;Friday\n&quot;); break; 
+        case 6: printf(&quot;Saturday\n&quot;); break; 
+        default:printf(&quot;Invalid day! \n&quot;); break; 
+    }
+    system(&quot;pause&quot;);
+    return 0；
+    }
+</code></pre>
+<pre><code class="language-c">    main()
+    { 
+    int day;
+    scanf(&quot;%d&quot;,&amp;day);
+    switch(day){
+        case 0: printf(&quot;Sunday\n&quot;);
+        case 1: printf(&quot;Monday\n&quot;); 
+        case 2: printf(&quot;Tuesday\n&quot;); 
+        case 3: printf(&quot;Wednesday\n&quot;); 
+        case 4: printf(&quot;Thursday\n&quot;); 
+        case 5: printf(&quot;Friday\n&quot;); 
+        case 6: printf(&quot;Saturday\n&quot;); 
+        default:printf(&quot;Invalid day! \n&quot;); 
+    }
+    system(&quot;pause&quot;);
+}
+</code></pre>
+<p>多个case子句，可共用同一语句（组），表示这些条件有同一组操作。<br>
+当输入为‘A’或者‘a’时，均 执行a_ct++</p>
+<p>练习：输入年份和月份，输出该年截至该月共有多少天。要求在判断某个月有多少天时用switch语句。<br>
+闰年的判断条件：<br>
+year能被4整除但不能被100整除；或者能被400整除。</p>
+<pre><code class="language-c">    # include&lt;stdio.h&gt;
+    # include&lt;stdlib.h&gt;
+    main()
+    {
+    int year, month, day;
+    int yearDays, i;
+
+    printf(&quot;input year-month-day:\n&quot;);
+    scanf(&quot;%d-%d-%d&quot;, &amp;year, &amp;month, &amp;day);
+
+    yearDays = 0;
+    for(i = 1; i &lt;= month-1; i++){
+            //求第i月的天数
+        switch(i){
+            case 1:case 3: case 5:case 7: case 8:case 10: case 12:
+                    yearDays += 31; break;
+            case 4:case 6: case 9:case 11:
+                    yearDays += 30; break;
+            case 2:
+                    if (year % 4 ==0 &amp;&amp; year % 100 !=0 || year %400 == 0)
+                            yearDays += 29;
+            else
+                    yearDays += 28;
+            break;
+            default:   printf(&quot;invalid month!&quot;);
+        }
+    }
+    printf(&quot;the days are %d&quot;,yearDays + day);
+    system(&quot;pause&quot;);
+    }
+</code></pre>
+<h1 id="10--break和continue语句">10  break和continue语句</h1>
+<p>为了使循环控制更加灵活，Ｃ语言提供了break语句和continue语句。</p>
+<ol>
+<li>一般格式：   break；
+continue；</li>
+<li>功能<br>
+（1）break：强行结束循环，转向执行循环语句的下一条语句。用于switch语句和循环语句中。<br>
+（2）continue：用于循环语句中。对于for循环，跳过循环体其余语句，转向循环变量增量表达式3的计算；对于while和do-while循环，跳过循环体其余语句，转向继续循环条件的判定。</li>
+</ol>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    main()
+    {
+        int x=1;
+
+        while ( x&lt;=10 ){
+            if (x ==5) break;
+            printf(&quot;%d&quot;,x);
+                x++;	
+        }
+        printf(&quot;\nBroke out of loop at x = = %d&quot;,x);
+        system(&quot;pause&quot;);
+        return 0；
+    }
+</code></pre>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    main()
+    {
+        int x;
+
+        for(x=1; x&lt;=10; x++ ){
+            if (x ==5) break;
+            printf(&quot;%d&quot;,x);	
+        }
+        printf(&quot;\nBroke out of loop at x = = %d&quot;,x);
+        system(&quot;pause&quot;);
+        return 0；
+    }
+</code></pre>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    main()
+    {
+        int x=1;
+
+        while ( x&lt;=10 ){
+            if (x ==5) continue;
+            printf(&quot;%d&quot;,x);
+                x++;	
+        }
+        printf(&quot;\nBroke out of loop at x = = %d&quot;,x);
+        system(&quot;pause&quot;);
+        return 0；
+    }
+</code></pre>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    main()
+    {
+        int x;
+
+        for(x=1; x&lt;=10; x++ ){
+            if (x ==5) continue; 
+            printf(“%d”,x);	
+        }
+        system(&quot;pause&quot;);
+        return 0；
+    }
+</code></pre>
+<pre><code class="language-c">    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    main()
+    {
+        int x ,y;
+            for(x =1; x &lt;= 2; x++ ){
+            for(y = 1; y &lt;= 10; y++ ){ 
+            if (y == 5) break; 
+            printf(&quot;x:%2d ,y:%2d\n&quot;,x,y);	
+            }	  
+        }
+        system(&quot;pause&quot;);
+        return 0;
+    }
+</code></pre>
+<pre><code class="language-c">    # include &lt;stdio.h&gt;
+    int main ()
+    {
+        const float MIN=0.0f;
+        const float MAX=100.0f;
+        float score;
+        float total=0.0f;
+        int n=0;
+        
+        printf(&quot;Enter the first Score(q to quit):&quot;);
+        
+
+    while (scanf(&quot;%f&quot;,&amp;score)==1)
+    {  if(score&lt;MIN ||score&gt;MAX)
+        {
+        printf(&quot;%.1f is an invalid value.Try again:&quot;,score);
+        continue;
+        }
+        printf(&quot;Accepting %0.1f:\n&quot;,score);
+        total+=score;
+        n++;
+        printf(&quot;Enter next score(q to quit):&quot;);   
+    }
+    If (n&gt;0) 
+        printf(“Average of %d scores is %0.1f\n”, n, total/n);   
+    return 0;
+    }
+</code></pre>
+
+</main>
+
+  <footer>
+  <script defer src="//yihui.org/js/math-code.js"></script>
+<script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script defer src="//yihui.org/js/center-img.js"></script>
+
+  
+  <hr/>
+  © <a href="https://github.com/Topology2333">Topology2333</a> 2022 &ndash; 2022 | <a href="https://github.com/Topology2333">Github</a> | <a href="https://twitter.com/VFriedrich8">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

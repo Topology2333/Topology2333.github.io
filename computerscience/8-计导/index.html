@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>实验性的课件复制体 | Topology2333&#39;s Blog</title>
+    <title>8-计导导论 | Topology2333&#39;s Blog</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -24,13 +24,13 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">实验性的课件复制体</span></h1>
+<h1><span class="title">8-计导导论</span></h1>
 <h2 class="author">Topology2333</h2>
-<h2 class="date">2022/12/04</h2>
+<h2 class="date">2022/12/06</h2>
 </div>
 
 <main>
-<h1 id="这一篇转载第九章数组部分">这一篇转载第九章：<code>数组</code>部分</h1>
+<h1 id="这一篇转载-8">这一篇转载 8</h1>
 <pre><code>
 </code></pre>
 <h3 id="提纲">提纲</h3>
@@ -40,76 +40,60 @@
 <h3 id="74--字符数组字符串及操作">7.4  字符数组（字符串及操作）</h3>
 <h3 id="75--数组作为函数参数的处理">7.5  数组作为函数参数的处理</h3>
 <h3 id="76--数组的排序查找算法">7.6  数组的排序、查找算法</h3>
-<pre><code>
-</code></pre>
 <h1 id="71-总结与回顾">7.1 总结与回顾</h1>
-<p>简单数据类型的局限：</p>
-<ol>
-<li>
-<p>数据抽象的局限</p>
-<pre><code>很多客观世界的事物很难抽象到简单的数据类型上。
-比如：数列或级数的抽象。
-</code></pre>
-</li>
-<li>
-<p>存储能力的局限</p>
-</li>
-<li>
-<p>处理能力的局限</p>
-<pre><code>比如对任意数列的排序和查找问题，依照目前的能力尚不能够进行处理。
-</code></pre>
-<h3 id="增强数据的表达存储和处理能力"><strong>增强数据的表达、存储和处理能力</strong></h3>
-</li>
-</ol>
-<h2 id="72--数组--数据存储结构">7.2  数组&ndash;数据存储结构</h2>
+<p>数据类型内涵：
+数据定义
+整数/实数/字符等是对客观世界事物（数据）的抽象，逻辑表达。
+数据的存储空间（范围）
+长整型、短整形、浮点数、字符等数据所分配的存储空间各不相同。
+数据的操作
+算术、逻辑、关系运算。
+简单数据类型的局限：
+数据抽象的局限
+很多客观世界的事物很难抽象到简单的数据类型上。比如：数列或级数的抽象。
+存储能力的局限
+处理能力的局限
+比如对任意数列的排序和查找问题，依照目前的能力尚不能够进行处理。
+增强数据的表达、存储和处理能力</p>
+<h1 id="72--数组--数据存储结构">7.2  数组&ndash;数据存储结构</h1>
+<p>利用数组可增强复杂数据的存储能力、操作能力。例如，存储某个班学生的成绩、每天的温度等。</p>
+<p>数组是一种数据的存储结构
+表达对象（数据的抽象）
+数组的存储结构
+数组的操作</p>
 <ol>
 <li>数组对表达对象的支持
-<pre><code> 线性表（向量）是具有相同数据类型的n(n&gt;=0)个数据元素的有限序列，
- 通常记为：
- （a1，a2，… ai-1，ai，ai+1，… an）
- 其中n为表长，n＝0时称为空表。 
- 数组是对线性表的一种存储结构。
-</code></pre>
-</li>
+现实世界经常存在这样的数据：某课程一个班级中按学号排列的各个学生考试成绩、一年中各月份的平均温度……其特点是这有限个数据元素的类型相同，且具有先后顺序关系；
+上述特征的数据可以抽象为线性表、向量。
+线性表（向量）是具有相同数据类型的n(n&gt;=0)个数据元素的有限序列，通常记为：
+（a1，a2，… ai-1，ai，ai+1，… an）
+其中n为表长，n＝0时称为空表。
+数组是对线性表的一种存储结构。</li>
 <li>数组是一组连续的存储单元（存储结构）
-<pre><code> 连续的含义：这些存储单元位置相邻；
- 具有相同数据类型，相同的名字。
-</code></pre>
-</li>
+连续的含义：这些存储单元位置相邻；
+具有相同数据类型，相同的名字。</li>
 <li>数组元素的访问（操作）
-<pre><code>数组名[元素序号]。其中元素序号又称下标。
-第一个元素的序号为0，因此c[0]引用数组c的第一个元素。
-c[i-1]引用第i个元素。
-
-下标运算符“[ ]”（数组操作）
-1. 在赋值语句右边时，该操作从数组元素中检索数据；
-   例：x=c[1]；//读取下标为1的数组元素的值，赋给变量x；
-2. 在左边时，对数组元素赋值。
-   例：c[2]=x*3+5; 
-   //将赋值表达式右 边的值赋给下标为2的数组元素。
-</code></pre>
-</li>
+数组名[元素序号]。其中元素序号又称下标。
+第一个元素的序号为0，因此c[0]引用数组c的第一个元素。c[i-1]引用第i个元素。</li>
 </ol>
-<h2 id="731-数组的声明">7.3.1 数组的声明</h2>
-<ol>
-<li>
-<p>数组的声明： （C99标准之前）</p>
-<pre><code>语法格式：元素类型名  数组名[常量]；
+<p>下标运算符“[ ]”（数组操作）
+在赋值语句右边时，该操作从数组元素中检索数据；
+例：x=c[1]；//读取下标为1的数组		           元素的值，赋给变量x；
+在左边时，对数组元素赋值。
+例：c[2]=x*3+5; //将赋值表达式右 边的值赋给下标为2的数组元素。</p>
+<h1 id="731-数组的声明">7.3.1 数组的声明</h1>
+<pre><code> 数组的声明： （C99标准之前）
+</code></pre>
+<p>语法格式：元素类型名  数组名[常量]；
 元素类型名 可以是整型、字符型、浮点型、结构和指针。
-常量说明数组元素的个数，运算结果必须为整型。
-</code></pre>
-</li>
-<li>
-<p>数组的声明：（C99标准）</p>
-<pre><code class="language-md">允许声明变长数组
+常量说明数组元素的个数，运算结果必须为整型。</p>
+<p>数组的声明：（C99标准）
+允许声明变长数组
 元素类型名  数组名[整型表达式]；
- int n;
- scanf(&quot;%d&quot;,  &amp;n);
- int score[n];  //数组长度为变量
-</code></pre>
-</li>
-</ol>
-<h2 id="732数组的操作">7.3.2数组的操作</h2>
+int n;
+scanf(&quot;%d&quot;,  &amp;n);
+int score[n];  //数组长度为变量</p>
+<h1 id="732数组的操作">7.3.2数组的操作</h1>
 <p>数组的初始化
 可利用声明语句对数组元素进行初始化：
 元素类型名 数组名[整型表达式]={值，值……值}；
@@ -117,38 +101,27 @@ c[i-1]引用第i个元素。
 int score[4]={65, 78, 54, 91};</p>
 <ol>
 <li>
-<pre><code>若在定义一个整型数组的同时赋初值，
-如果初始化值的个数小于数组元素的个数，
-剩余的元素被自动初始化为0。
-例如：int score[4]={80};
-</code></pre>
+<p>若在定义一个整型数组的同时赋初值，如果初始化值的个数小于数组元素的个数，剩余的元素被自动初始化为0。
+例如：int score[4]={80};</p>
 </li>
 <li>
-<pre><code>若在定义一个浮点型数组的同时赋初值，
-如果初始化值的个数小于数组元素的个数，
-剩余的元素被自动初始化为0.000000。
-如：float score[4]={85.5};
-</code></pre>
+<p>若在定义一个浮点型数组的同时赋初值，如果初始化值的个数小于数组元素的个数，剩余的元素被自动初始化为0.000000。
+如：float score[4]={85.5};</p>
 </li>
 <li>
-<pre><code>如果初始化元素个数大于数组长度，则编译会报错。
-例如：int score[4]={65, 78, 54, 91, 60};
-</code></pre>
+<p>如果初始化元素个数大于数组长度，则编译会报错，例如：
+int score[4]={65, 78, 54, 91, 60};</p>
 </li>
 <li>
-<pre><code>如果在声明带有初始化值列表的数组时省略数组大小，
-则数组元素的个数就是初始化值列表中的元素个数。
-int score[] = {65, 78, 54, 91,60};  //score有5个元素
-</code></pre>
+<p>如果在声明带有初始化值列表的数组时省略数组大小，则数组元素的个数就是初始化值列表中的元素个数。
+int score[] = {65, 78, 54, 91,60};  //score有5个元素</p>
 </li>
 </ol>
-<p>数组元素和普通的基本类型变量一样，
-对基本类型变量的所有操作(读、赋值、取地址等)同样适用于数组元素，
-基本变量能出现的地方数组元素也可以出现。</p>
+<p>数组元素和普通的基本类型变量一样，对基本类型变量的所有操作(读、赋值、取地址等)同样适用于数组元素，基本变量能出现的地方数组元素也可以出现。</p>
 <p>数组元素不能整体引用，每次只能引用数组的一个元素。例如，不能用赋值运算对数组进行整体赋值。
 int a[5];
 a = {1,2,3,4,5};  //错误</p>
-<p><strong>数组名实际上是数组的首元素地址</strong></p>
+<p>数组名实际上是数组的首元素地址</p>
 <pre><code class="language-c">main()
 {
    char array[5];
@@ -156,7 +129,7 @@ a = {1,2,3,4,5};  //错误</p>
    return 0;
 }	
 </code></pre>
-<h2 id="733数组的操作">7.3.3数组的操作</h2>
+<h1 id="733数组的操作">7.3.3数组的操作</h1>
 <pre><code class="language-c"># include &lt;stdio.h&gt;
 # define SIZE 10
 # define PAR 72
@@ -167,15 +140,15 @@ int main(void)
    
     printf(&quot;Enter %d golf scores:\n&quot;, SIZE); 
     for (index = 0; index &lt; SIZE; index++)
-        scanf(&quot;%d&quot;, &amp;score[index]);//read in the ten scores
+        scanf(&quot;%d&quot;, &amp;score[index]);  // read in the ten scores
     printf(&quot;The scores read in are as follows:\n&quot;);
     for (index = 0; index &lt; SIZE; index++)
-        printf(&quot;%5d&quot;, score[index]);//verify input
+        printf(&quot;%5d&quot;, score[index]); // verify input
     printf(&quot;\n&quot;);
 
     for (index = 0; index &lt; SIZE; index++)
-        sum += score[index];// add them up
-    average = (float) sum / SIZE;// time-honored method
+        sum += score[index];               // add them up
+    average = (float) sum / SIZE;    // time-honored method
 
     printf(&quot;Sum of scores = %d, average = %.2f\n&quot;, sum, average);
     printf(&quot;That's a handicap of %.0f.\n&quot;, average - PAR);
@@ -187,48 +160,45 @@ int main(void)
 <p>练习2.   定义一个能容纳10个元素的整型数组a，从键盘读取9个整数存放到前9个数组元素中。
 1）从键盘读取一个整数n和位置p(0&lt;=p&lt;=8)，插入n到数组a中，插入位置：下标p。要求插入点及后续的数组元素都要后移动。
 2从键盘再次读取位置p(0&lt;=p&lt;=8)，删除数组a中下标为p的元素。要求被删除的数组元素之后的元素都要前移。</p>
-<pre><code class="language-c">
- // 插入num到下标为p的数组元素中 
+<pre><code class="language-c"> // 插入num到下标为p的数组元素中 
    for(i=SIZE-2; i&gt;=p; i--) //下标为SIZE-2～p的数组元素依次后挪 
 	   a[i+1]=a[i];
    a[p]=num;  //插入num到下标为p的数组元素中 
 
-
  // 删除下标为p的数组元素中内容 
 for(i=p+1; i&lt;=SIZE-1; i++) //下标为p+1～SIZE-1数组元素依次前挪
 	   a[i-1]=a[i]; 
-
 </code></pre>
 <pre><code class="language-c">int main(void)
 {
    int a[SIZE], i, p, num; 
    char s[10];
+
    // 往数组中前SIZE-1个元素赋值 
    printf(&quot;input %d numbers\n&quot;, SIZE-1); 
    for(i=0; i&lt;=SIZE-2; i++) 
       scanf(&quot;%d&quot;,&amp;a[i]);
+
 	//输出数组
    printf(&quot;before insert, the array is:\n&quot;);  	
    for(i=0; i&lt;=SIZE-2; i++)
       printf(&quot;%d\t&quot;, a[i]); 
   // 读入要插入的元素以及位置下标 
-
    fflush(stdin);	//清空键盘缓冲区 
    printf(&quot;input number to add:\n&quot;); 
    scanf(&quot;%d&quot;, &amp;num); 
    printf(&quot;input position(&lt;=%d):\n&quot;, SIZE-2); 
    scanf(&quot;%d&quot;,&amp;p);   
-   //插入元素
+   
+   //插入 元素
    for(i=SIZE-2; i&gt;=p; i--) //下标为SIZE-2～p的数组元素依次后挪 
 	   a[i+1]=a[i];
    a[p]=num; //插入num到下标为p的数组元素中 
-
    // 读入要删除的元素下标 
    printf(&quot;\ninput number position to delete:\n&quot;); 
    scanf(&quot;%d&quot;, &amp;p); 
    
-   for(i=p+1; i&lt;=SIZE-1; i++) 
-   //下标为p+1～SIZE-1的数组元素依次前挪
+   for(i=p+1; i&lt;=SIZE-1; i++) //下标为p+1～SIZE-1的数组元素依次前挪
 	   a[i-1]=a[i]; 
    printf(&quot;after delete, the array is:\n&quot;); 	   
    for(i=0; i&lt;=SIZE-2; i++)
@@ -237,14 +207,10 @@ for(i=p+1; i&lt;=SIZE-1; i++) //下标为p+1～SIZE-1数组元素依次前挪
     return 0；						
 } 
 </code></pre>
-<p>40位学生为餐厅打分，分数值分为1~10的10个等级，<br>
-要求统计出各个分数值的打分人数；<br>
-40个学生的打分分值构成了一个线性表。</p>
-<p>可以用一个长为40的整型数组来存放；<br>
+<p>40位学生为餐厅打分，分数值分为1~10的10个等级，要求统计出各个分数值的打分人数；
+40个学生的打分分值构成了一个线性表，可以用一个长为40的整型数组来存放；
 int response[40]
-假设ai代表分值为i的票数，<br>
-则(a1, a2, …, a10)构成一个线性表，<br>
-可用一个长度为10的整型数组来存放：<br>
+假设ai代表分值为i的票数，则(a1, a2, …, a10)构成一个线性表，可用一个长度为10的整型数组来存放：
 int frequency[10]</p>
 <pre><code class="language-c"># include &lt;stdio.h&gt;
 # define RESPONSE_SIZE 40
@@ -266,59 +232,38 @@ int main(void)
    return 0;
 } 
 </code></pre>
-<pre><code class="language-c">   int response[RESPONSE_SIZE] 存放40个学生的评分
-   int frequency[FREQUENCY_SIZE] 存放1～10之间各等级分值的统计票数
-   response[answer] 某个学生的评分值，取值为1~10
-   frequency[rating] 某一分值的统计结果
-   ++frequency[response[answer]] 根据某个学生的评分值将该分值的统计结果加1。
-</code></pre>
-<p>为什么要将FREQUENCY_SIZE定义为11呢？<br>
+<p>int response[RESPONSE_SIZE] 存放40个学生的评分
+int frequency[FREQUENCY_SIZE] 存放1～10之间各等级分值的统计票数
+response[answer] 某个学生的评分值，取值为1~10
+frequency[rating] 某一分值的统计结果
+++frequency[response[answer]] 根据某个学生的评分值将该分值的统计结果加1。
+为什么要将FREQUENCY_SIZE定义为11呢？
 将数组的下标值与评分值对应： frequency[1]~frequency[10]</p>
-<h2 id="74-字符数组">7.4 字符数组</h2>
+<h1 id="74-字符数组">7.4 字符数组</h1>
 <p>字符数组初始化
-三种方式：</p>
-<pre><code>   char a[]={‘f’, ‘i’, ‘r’, ‘s’,‘t’, ‘\0’};  
-   也可写为：char a[]={&quot;first&quot;};    
-   或去掉{}写为：char a[]=&quot;first&quot;; 
-   内存中存放形式为：
-</code></pre>
-<p>后两种初始化情况中，‘\0’是系统自动加上的。<br>
-上述声明中没有指定数组的长度，<br>
-编译器会根据字符串的长度来确定数组的长度<br>
-(字符串长度+1)。</p>
+三种方式： <br>
+char a[]={‘f’, ‘i’, ‘r’, ‘s’,‘t’, ‘\0’};<br>
+也可写为：char a[]={&ldquo;first&rdquo;}; <br>
+或去掉{}写为：char a[]=&ldquo;first&rdquo;;
+内存中存放形式为：</p>
+<p>后两种初始化情况中，‘\0’是系统自动加上的。
+上述声明中没有指定数组的长度，编译器会根据字符串的长度来确定数组的长度（字符串长度+1）。</p>
 <p>用printf函数和scanf函数一次性输出、输入一个字符数组中的所有字符</p>
 <pre><code class="language-c">void main()
 {
   char st[200];
   printf(&quot;input string:\n&quot;);
-  scanf(“%s”,st);  /*注意:是st而不是&amp;st!因为数组名代表了数组的首地址*/
+  scanf(“%s”,st);  /*注意:是st而不是&amp;st!因为数组				名代表了数组的首地址*/
   printf(“%s”,st); /*注意：转换说明符是%s*/
 }    
 </code></pre>
-<pre><code class="language-md">scanf函数读取用户键入的字符到字符数组，
-直到遇到空格、回车、或文件结束符（EOF）为止。
-空格、回车、或文件结束符被丢弃，
-最后一个字符读入后往字符数组中写入结束符‘\0’。
-Printf输出时‘\0’不输出。
-# 注意：scanf不关心字符数组的大小，
-所以它往数组中写字符时，
-所写入的字符可能超出数组的范围。
-程序员必须自己控制。
-</code></pre>
-<p>读、写一行字符：</p>
-<p><strong>char * gets(char * s);</strong><br>
-从标准输入设备（如键盘）<br>
-读取字符到s所指向的数组中，<br>
-直到读到文件末尾或者换行符‘\n’。<br>
-换行符被丢弃，<br>
-最后一个字符读入后写入一个 ‘\0’。<br>
-若成功则返回s，<br>
-若无字符读入数组或者读取失败<br>
-返回空指针NULL。</p>
-<p><strong>int puts(const char * s);</strong><br>
-将s所指向的字符串输出到标准输出设备（如显示器），<br>
-并在输出中添加一个换行符‘\n’ 。<br>
-终止字符串的 ‘\0’不被输出。</p>
+<p>scanf函数读取用户键入的字符到字符数组，直到遇到空格、回车、或文件结束符（EOF）为止。空格、回车、或文件结束符被丢弃，最后一个字符读入后往字符数组中写入结束符‘\0’。 Printf输出时‘\0’不输出。
+注意：scanf不关心字符数组的大小，所以它往数组中写字符时，所写入的字符可能超出数组的范围。程序员必须自己控制。</p>
+<p>读、写一行字符：
+char * gets(char * s);
+从标准输入设备（如键盘）读取字符到s所指向的数组中，直到读到文件末尾或者换行符‘\n’。换行符被丢弃，最后一个字符读入后写入一个 ‘\0’。若成功则返回s，若无字符读入数组或者读取失败返回空指针NULL。
+int puts(const char * s);
+将s所指向的字符串输出到标准输出设备（如显示器），并在输出中添加一个换行符‘\n’ 。终止字符串的 ‘\0’不被输出。</p>
 <pre><code class="language-c">void main()
 {
     char st[15];
@@ -329,7 +274,8 @@ Printf输出时‘\0’不输出。
     return 0;
 }
 </code></pre>
-<p>scanf和gets在读取一行数据时的区别：</p>
+<p>7.4 字符数组
+scanf和gets在读取一行数据时的区别：</p>
 <pre><code class="language-c">main()
 {
 char str[10];
@@ -350,13 +296,15 @@ system(&quot;pause&quot;);
    system(&quot;pause&quot;);
 }
 </code></pre>
-<p>练习2：从键盘读取一个长度不超过50的字符串（以‘＃’结束）存放到一个字符数组中，然后将字符串逆序，并输出。 如输入为：“hello world＃”，则输出为：dlrow olleh.<br>
+<p>关于strcpy函数的几点说明
+练习2：从键盘读取一个长度不超过50的字符串（以‘＃’结束）存放到一个字符数组中，然后将字符串逆序，并输出。 如输入为：“hello world＃”，则输出为：dlrow olleh.<br>
 问题分析：
 实现逆序的手段是第i个元素和倒数第i个元素交换。
 交换次数：len/2次（len为字符串长度），故 i的变化范围是：0 ~ len/2-1
 a[i]与a[x]交换，x=len-1-i
 字符数组逆序</p>
 <pre><code class="language-c"># include &lt;stdio.h&gt; 
+
 main()
 {
    char string[50], ch; 
@@ -397,10 +345,10 @@ main()
     return 0;
 } 
 </code></pre>
-<h2 id="75-数组作为函数参数的处理">7.5 数组作为函数参数的处理</h2>
-<p>一、数组元素作函数实参<br>
-数组元素就是下标变量，它与普通变量并无区别。 因此它作为函数实参使用时与普通变量完全相同，在发生函数调用时，把作为实参的数组元素的值传送给形参，实现单向的按值传送。<br>
-二、将数组名作为函数的实参<br>
+<h1 id="75-数组作为函数参数的处理">7.5 数组作为函数参数的处理</h1>
+<p>一、数组元素作函数实参
+数组元素就是下标变量，它与普通变量并无区别。 因此它作为函数实参使用时与普通变量完全相同，在发生函数调用时，把作为实参的数组元素的值传送给形参，实现单向的按值传送。
+二、将数组名作为函数的实参
 目的：数组名作为函数的实参时，传递的是数组的首地址（第一个元素的地址）。使得被调用函数能够访问、操作原数组！
 方法：要求形参和相对应的实参都必须是类型相同的数组，都必须有明确的数组说明，此时被调函数实际操作的是原数组。
 机理：将数组名作为实参传递给函数，函数就获得了数组的首地址，根据首地址能计算出原数组各个元素的内存地址，从而访问这些数组元素。</p>
@@ -476,9 +424,9 @@ int main(void)
 </code></pre>
 <p>数组元素求和-递归算法1
 设计递归函数，用于求整型数组中各元素之和。
-数组元素求和-递归算法2
-// 递归求数组元素之和：算法2</p>
-<pre><code class="language-c">int sum2(int a[], int size)
+数组元素求和-递归算法2</p>
+<pre><code class="language-c">// 递归求数组元素之和：算法2
+int sum2(int a[], int size)
 {
    if (size == 1)
        return a[0];
@@ -506,7 +454,7 @@ main()
 	} 	  		
 }
 </code></pre>
-<h2 id="76-数组的排序与查找算法">7.6 数组的排序与查找算法</h2>
+<h1 id="76-数组的排序与查找算法">7.6 数组的排序与查找算法</h1>
 <p>排序：
 现实世界中排序无处不在，排序也是算法方法中的经典问题。
 假定待排序的n个数据，原本是杂乱无章的存放在数组中，我们需要设计算法将这些数排序。
@@ -518,8 +466,8 @@ main()
 同样，查找也是现实世界中经常遇到的问题，如：
 顺序查找
 折半查找</p>
-<p>/<em>冒泡排序算法1：升序排序，以loc作为循环控制变量</em>/</p>
-<pre><code class="language-c">void bubbleSortDown1(int a[], int size) 
+<pre><code class="language-c">/*冒泡排序算法1：升序排序，以loc作为循环控制变量*/
+void bubbleSortDown1(int a[], int size) 
 {
 	int loc, i, temp;
 	
@@ -570,8 +518,8 @@ void selectSortDown(int data[], int elementCount)
 		}     
 	} 
 }   
-</code></pre>
-<pre><code class="language-c">/* 函数功能：找数组中的最大值元素，并返回其下标 
+
+/* 函数功能：找数组中的最大值元素，并返回其下标 
    参数说明：数组名，查找起始位置下标，查找终止位置下标*/
 int findMax(int data[], int startLoc, int endLoc)
 {
@@ -654,7 +602,6 @@ int findElement(const int data[], int startLoc, int endLoc, int element)
    
    return -1;
 }
-
 int binarySearch(int a[],int searchKey,int low,int high)
 {
    int middle;
